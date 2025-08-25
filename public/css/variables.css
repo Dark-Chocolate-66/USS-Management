@@ -1,9 +1,12 @@
 :root {
-  --color-primary: #1e3a8a;   /* dark blue */
-  --color-secondary: #f97316; /* orange */
-  --color-bg: #f9fafb;
-  --color-text: #111827;
-  --color-white: #ffffff;
+  --color-primary: #7857C9;   
+  --color-secondary: #0A8F8F; 
+  --color-mainbg: #FFFFFF;
+  --color-bg: #F5F7FA;
+  --color-primarytext: #2D2D2D;
+  --color-secondtext: #666666;
+  --color-primaryaccent: #FF6B6B;
+  --color-secondaccent: #FFD166;
 
   --font-base: 'Inter', sans-serif;
 
