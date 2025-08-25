@@ -7,32 +7,43 @@
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 </head>
 <body>
-    <!-- Sidebar -->
-    <aside class="sidebar">
-        <div class="sidebar__logo">OrangeHRM</div>
-        <nav class="sidebar__nav">
-            <a href="#">Dashboard</a>
-            <a href="#">Employees</a>
-            <a href="#">Leave</a>
-            <a href="#">Reports</a>
-        </nav>
-    </aside>
+    <div class="layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="profile">
+                <img src="https://via.placeholder.com/70" alt="User">
+                <h3>User Name</h3>
+                <p>Admin</p>
+            </div>
+            
+            <div class="search">
+                <input type="text" placeholder="Search...">
+            </div>
+            
+            <nav>
+                <a href="#" class="active">Dashboard</a>
+                <a href="#">Employees</a>
+                <a href="#">Leave</a>
+                <a href="#">Reports</a>
+            </nav>
+        </aside>
 
-    <!-- Navbar -->
-    <header class="navbar">
-        <div class="navbar__left">
-            <h1>Dashboard</h1>
-        </div>
-        <div class="navbar__right">
-            <span>User Name</span>
-        </div>
-    </header>
+        <!-- Navbar -->
+        <header class="navbar">
+            <div class="navbar__left">
+                <h1>Dashboard</h1>
+            </div>
+            <div class="navbar__right">
+                <span>User Name</span>
+            </div>
+        </header>
 
-    <!-- Main Content -->
-    <main class="main-content">
-        <div class="card card--main">
-            @yield('content')
-        </div>
-    </main>
+        <!-- Main Content -->
+        <main class="main">
+            <div class="card--main">
+                @yield('content')
+            </div>
+        </main>
+    </div>
 </body>
 </html>

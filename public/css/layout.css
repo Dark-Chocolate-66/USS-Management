@@ -1,24 +1,110 @@
-/* ================================
-   LAYOUT.CSS
-   Navbar (top) + Main + Sidebar (fixed bottom)
-================================ */
-
-/* Base Layout Container */
+/* =========================
+   LAYOUT CONTAINER
+========================= */
 .layout {
-  display: flex;
-  height: 100vh;
-  width: 100%;
-  overflow: hidden;
+  display: grid;
+  grid-template-columns: 250px 1fr; /* Sidebar + Main */
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "sidebar navbar"
+    "sidebar main";
+  min-height: 100vh;
+  background: var(--color-bg);
+  font-family: 'Inter', sans-serif;
 }
 
-/* Navbar (Top) */
-.navbar {
+/* =========================
+   SIDEBAR
+========================= */
+.sidebar {
+  grid-area: sidebar;
+  background: var(--color-mainbg);
+  border-right: 1px solid #eaeaea;
+  padding: 20px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebar .profile {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.sidebar .profile img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  border: 2px solid var(--color-primary);
+}
+
+.sidebar .profile h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-primarytext);
+}
+
+.sidebar .profile p {
+  font-size: 0.85rem;
+  color: var(--color-secondtext);
+}
+
+/* Sidebar Search */
+.sidebar .search {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.sidebar .search input {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid #ddd;
+  font-size: 0.9rem;
+}
+
+/* Sidebar Menu */
+.sidebar nav {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar nav a {
+  display: flex;
+  align-items: center;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-secondtext);
+  text-decoration: none;
+  transition: background 0.3s, color 0.3s;
+}
+
+.sidebar nav a:hover {
+  background: var(--color-secondary);
+  color: var(--color-mainbg);
+}
+
+.sidebar nav a.active {
   background: var(--color-primary);
+  color: var(--color-mainbg);
+}
+
+/* =========================
+   NAVBAR
+========================= */
+.navbar {
+  grid-area: navbar;
+  background: var(--color-mainbg);
+  border-bottom: 2px solid var(--color-secondaccent);
   padding: 12px 20px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--color-secondaccent);
+  justify-content: space-between;
 }
 
 .navbar h1 {
@@ -27,65 +113,25 @@
   color: var(--color-primarytext);
 }
 
-.navbar .nav-actions {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+.navbar .user {
+  font-size: 0.95rem;
+  color: var(--color-primarytext);
 }
 
-/* Main Content */
-.main-content {
-  flex: 1;
+/* =========================
+   MAIN CONTENT
+========================= */
+.main {
+  grid-area: main;
   padding: 20px;
+  background: var(--color-bg);
   overflow-y: auto;
-  margin-bottom: 60px; /* leave space so content doesn’t hide under bottom nav */
 }
 
-.main-content .card--main {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-
-
-/* Sidebar */
-.sidebar {
-  width: 2400px;
-  background-color: var(--color-primary);
-  color: white;
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-  flex-shrink: 0;
-}
-
-/* Sidebar Links */
-.sidebar a {
-  color: white;
-  text-decoration: none;
-  margin: 0.75rem 0;
-  font-weight: 500;
-  transition: background 0.2s ease-in-out;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-}
-
-.sidebar a:hover {
-  background-color: rgba(255, 255, 255, 0.15);
-}
-
-/* ================================
-   Responsive
-================================ */
-@media (max-width: 768px) {
-  .navbar h1 {
-    font-size: 1rem;
-  }
-
-  .sidebar a {
-    font-size: 0.85rem;
-    padding: 6px 10px;
-  }
+.card--main {
+  background: var(--color-mainbg);
+  border-radius: var(--radius-lg);
+  padding: 25px;
+  min-height: calc(100vh - 70px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
 }
