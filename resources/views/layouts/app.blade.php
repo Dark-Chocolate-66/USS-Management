@@ -21,7 +21,7 @@
             </div>
             
             <nav>
-                <a href="#" class="active">Dashboard</a>
+                <a href="#">Dashboard</a>
                 <a href="#">Employees</a>
                 <a href="#">Leave</a>
                 <a href="#">Reports</a>

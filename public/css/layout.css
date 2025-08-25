@@ -99,7 +99,7 @@
 ========================= */
 .navbar {
   grid-area: navbar;
-  background: var(--color-mainbg);
+  background: var(--color-primary);
   border-bottom: 2px solid var(--color-secondaccent);
   padding: 12px 20px;
   display: flex;
