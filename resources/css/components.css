@@ -1,0 +1,70 @@
+.btn {
+  font-family: var(--font-family);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+/* Primary Action (Purple) */
+.btn-primary {
+  background: var(--color-bg);
+  color: var(--color-primarytext);
+}
+.btn-primary:hover {
+  background: var(--color-secondary); 
+  color: var(--color-texthover);
+}
+
+/* Secondary Action (Teal) */
+.btn-secondary {
+  background: var(--color-hover);
+  color: var(--color-mainbg);
+}
+.btn-secondary:hover {
+  background: var(--color-secondary);
+}
+
+/* Accent Action (Coral) */
+.btn-accent {
+  background: var(--color-primaryaccent);
+  color: var(--color-mainbg);
+}
+.btn-accent:hover {
+  opacity: 0.9;
+}
+
+/* Warning / Highlight (Gold) */
+.btn-warning {
+  background: var(--color-secondaccent);
+  color: var(--color-primarytext);
+  font-weight: bold;
+}
+.btn-warning:hover {
+  opacity: 0.9;
+}
+
+/* Sidebar Toggle Button */
+.btn-toggle {
+  @apply flex items-center justify-center; 
+  
+  position: absolute;
+  top: 100px;       /* adjust as needed */
+  right: -15px;     /* float outside sidebar */
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  z-index: 50;
+
+  /* inherit base btn + btn-secondary look */
+  background: var(--color-hover);
+  color: var(--color-mainbg);
+  transition: background 0.3s ease;
+}
+
+.btn-toggle:hover {
+  background: var(--color-secondary);
+  color: var(--color-mainbg);
+}
