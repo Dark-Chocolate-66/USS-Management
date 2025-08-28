@@ -11,14 +11,14 @@
 /* Primary Action (Purple) */
 .btn-primary {
   background: var(--color-bg);
-  color: var(--color-primarytext);
+  color: var(--color-secondtext);
 }
 .btn-primary:hover {
   background: var(--color-secondary); 
   color: var(--color-texthover);
 }
 
-/* Secondary Action (Teal) */
+/* Secondary Action */
 .btn-secondary {
   background: var(--color-hover);
   color: var(--color-mainbg);

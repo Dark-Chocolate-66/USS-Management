@@ -42,7 +42,7 @@
                class="mb-4 pl-10 pr-4 py-2 w-full rounded bg-[var(--color-bg)] text-xs text-[var(--color-primarytext)] focus:outline-none border border-[var(--color-bg)]">
     </div>
      <div class="flex-1 overflow-y-auto custom-scrollbar text-xs">
-        <nav class="flex flex-col space-y-1 text-[var(--color-primarytext)]">
+        <nav class="flex flex-col space-y-1 text-[var(--color-secondtext)]">
                 <!--menu item -->
                 <a href="{{ route('hr.index') }}" class="menu-item flex items-center gap-2 {{ request()->routeIs('hr.*') ? 'active' : '' }}"><x-heroicon-o-clipboard-document-list class="w-5 h-5 flex-shrink-0"/><span x-show="open">HR Administration</span></a>
                 <a href="{{ route('employees.index') }}" class="menu-item flex items-center gap-2 {{ request()->routeIs('employees.index*') ? 'active' : '' }}"><x-heroicon-o-user-group class="w-5 h-5 flex-shrink-0"/><span x-show="open">Employee Management</span></a>
@@ -90,12 +90,31 @@
             <!-- Taskbar -->
             <div class="flex items-center gap-3 px-6 py-2 bg-[var(--color-mainbg)] shadow-sm">
                 <!-- Home button -->
-                <a href="{{ route('dashboard') }}" class="flex items-center gap-1 text-[var(--color-primarytext)] hover:text-[var(--color-texthover)]">
+                <a href="{{ route('dashboard') }}" class="flex items-center gap-1 ml-4 text-[var(--color-secondtext)] hover:text-[var(--color-texthover)]">
                     <x-heroicon-o-home class="w-5 h-5"/>
                 </a>
 
                 <!-- Contextual buttons -->
+                <div class="flex items-center gap-3 ml-4 pl-4 border-l border-gray-300">
                 @yield('taskbar')
+                </div>
+                <!-- Right side (Filter, Help, Shortcuts) -->
+    <div class="flex items-center space-x-1">
+        <!-- Filter Button (with left border like Home)
+        <button class="flex items-center justify-center w-10 h-10 border-l border-gray-300 hover:text-[var(--color-texthover)] rounded-lg">
+            <x-heroicon-o-funnel class="w-5 h-5"/>
+        </button> -->
+
+        <!-- Help Button -->
+        <button class="flex items-center justify-center w-10 h-10 hover:text-[var(--color-texthover)] rounded-none border-l border-gray-300 ml-4">
+            <x-heroicon-o-question-mark-circle class="w-5 h-5 ml-4"/>
+        </button>
+
+        <!-- Shortcuts Button -->
+        <button class="flex items-center justify-center w-10 h-10 hover:text-[var(--color-texthover)] rounded-none">
+            <x-heroicon-o-arrow-turn-up-right class="w-5 h-5 ml-2"/>
+        </button>
+    </div>
             </div>
 
             <!-- Page Content -->
