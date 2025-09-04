@@ -151,26 +151,218 @@ Route::middleware(['web', 'auth'])->group(function () {
         });
         Route::get('/employees/search', [EmployeeController::class, 'search'])->name('employees.search');
     });
+    // ============================
+    // Reports & Analytics
+    // ============================
+        Route::prefix('reports')->name('reports.')->group(function () {
+        Route::redirect('/', '/reports/list')->name('index');
+
+        Route::view('/list', 'reports.reportlist')->name('list');
+        Route::view('/scheduled', 'reports.scheduled')->name('scheduled');
+    });
+    // ===============================
+    // Leave Management
+    // ===============================
+    Route::prefix('leave')->name('leave.')->group(function () {
+    Route::redirect('/', '/leave/list')->name('index');
+
+    // Direct pages
+    Route::view('/list', 'leave.list')->name('list');
+    Route::view('/assign', 'leave.assign')->name('assign');
+    Route::view('/bulk-assign', 'leave.bulk_assign')->name('bulk');
+    Route::view('/apply', 'leave.apply')->name('apply');
+    Route::view('/usage', 'leave.my_leave_usage')->name('usage');
+
+    // More dropdown
+    Route::view('/calendar', 'leave.more.leave_calendar')->name('calendar');
+    Route::view('/my-leave', 'leave.more.my_leave')->name('my_leave');
+
+    // Entitlements
+    Route::prefix('entitlements')->name('entitlements.')->group(function () {
+        Route::view('/add', 'leave.more.entitlements.add')->name('add');
+        Route::view('/list', 'leave.more.entitlements.list')->name('list');
+        Route::view('/my', 'leave.more.entitlements.my')->name('my');
+    });
+
+    // Configure
+    Route::prefix('configure')->name('configure.')->group(function () {
+        Route::view('/period', 'leave.more.configure.period')->name('period');
+        Route::view('/types', 'leave.more.configure.types')->name('types');
+        Route::view('/holidays', 'leave.more.configure.holidays')->name('holidays');
+        Route::view('/weekends', 'leave.more.configure.weekends')->name('weekends');
+        Route::view('/bradford', 'leave.more.configure.bradford')->name('bradford');
+        Route::view('/notifications', 'leave.more.configure.notifications')->name('notifications');
+        Route::view('/calendar', 'leave.more.configure.calendar')->name('calendar');
+    });
+});
+
+    // ==========================
+    // Time Tracking
+    // ==========================
+    Route::prefix('time')->name('time.')->group(function () {
+    Route::redirect('/', '/time/timesheets')->name('index');
+
+    // Main
+    Route::view('/timesheets', 'time.index')->name('timesheets');
+    Route::view('/my', 'time.more.mytimesheets')->name('my');
+
+    // Activity Info
+    Route::prefix('info')->name('info.')->group(function () {
+        Route::view('/activities', 'time.more.info.activities')->name('activities');
+        Route::view('/customers', 'time.more.info.customers')->name('customers');
+        Route::view('/projects', 'time.more.info.projects')->name('projects');
+    });
+
+    // Configure
+    Route::prefix('configuration')->name('configuration.')->group(function () {
+        Route::view('/periods', 'time.more.configuration.periods')->name('periods');
+    });
+
+     // Search
+    Route::view('/search', 'time.search')->name('search');
+});
+
+    //=====================
+    // Attendance
+    //=====================
+    Route::prefix('attendance')->name('attendance.')->group(function () {
+    Route::view('/sheets', 'attendance.sheets')->name('sheets');
+    Route::view('/approve', 'attendance.approve')->name('approve');
+    Route::view('/records', 'attendance.records')->name('records');
+    Route::view('/punch', 'attendance.punch')->name('punch');
+
+    // More dropdown
+    Route::view('/my-sheet', 'attendance.more.my_sheet')->name('my_sheet');
+    Route::view('/my-monthly', 'attendance.more.my_monthly')->name('my_monthly');
+    Route::view('/policies', 'attendance.more.policies')->name('policies');
+    Route::view('/upload', 'attendance.more.upload')->name('upload');
+    Route::view('/configuration', 'attendance.more.configuration')->name('configuration');
+});
+
+    // ==========================
+    // Recruitment
+    // ==========================
+        Route::prefix('recruitment')->name('recruitment.')->group(function () {
+    // Main Recruitment index with taskbar
+    Route::view('/', 'recruitment.index')->name('index');
+
+    // Direct pages (they extend recruitment.index)
+    Route::view('/candidates', 'recruitment.candidates')->name('candidates');
+    Route::view('/vacancies', 'recruitment.vacancies')->name('vacancies');
+
+    // Configuration dropdown
+    Route::prefix('configuration')->name('configuration.')->group(function () {
+        Route::view('/vacancy-templates', 'recruitment.configuration.vacancy_templates')->name('vacancy_templates');
+        Route::view('/standard-tests', 'recruitment.configuration.standard_tests')->name('standard_tests');
+        Route::view('/document-templates', 'recruitment.configuration.document_templates')->name('document_templates');
+        Route::view('/email-templates', 'recruitment.configuration.email_templates')->name('email_templates');
+        Route::view('/candidate-sources', 'recruitment.configuration.candidate_sources')->name('candidate_sources');
+    });
+});
+
+// ==========================
+// On/Offboarding
+// ==========================
+    // On/Offboarding
+Route::prefix('boarding')->name('boarding.')->group(function () {
+    // Main entry
+    Route::view('/', 'boarding.index')->name('index');
+
+    // Direct page
+    Route::view('/preboarding', 'boarding.preboarding')->name('preboarding');
+
+    // On/Offboarding dropdown
+    Route::prefix('manage')->name('manage.')->group(function () {
+        Route::view('/events', 'boarding.manage.events')->name('events');
+        Route::view('/tasks', 'boarding.manage.tasks')->name('tasks');
+        Route::view('/my-events', 'boarding.manage.my_events')->name('my_events');
+        Route::view('/my-tasks', 'boarding.manage.my_tasks')->name('my_tasks');
+        Route::view('/configure', 'boarding.manage.configure')->name('configure');
+    });
+});
+
+// ==========================
+// Training
+// ==========================
+Route::prefix('training')->name('training.')->group(function () {
+    // Main index
+    Route::view('/', 'training.index')->name('index');
+
+    // Direct buttons
+    Route::view('/courses', 'training.courses')->name('courses');
+    Route::view('/sessions', 'training.sessions')->name('sessions');
+    Route::view('/my-participating-sessions', 'training.my_participating_sessions')->name('my-participating');
+
+
+    // More dropdown
+    Route::prefix('more')->name('more.')->group(function () {
+        // Online Assessment Courses (sub-dropdown)
+        Route::prefix('online-assessments')->name('online_assessments.')->group(function () {
+            Route::view('/employee', 'training.more.online_assessments.employee')->name('employee');
+            Route::view('/my', 'training.more.online_assessments.my')->name('my');
+            Route::view('/courses', 'training.more.online_assessments.courses')->name('courses');
+            Route::view('/certificate-template', 'training.more.online_assessments.certificate_template')->name('certificate_template');
+        });
+    });
+});
+
+// ==========================
+// Goals
+// ==========================
+Route::prefix('goals')->name('goals.')->group(function () {
+    // When visiting /goals → show index.blade.php
+    Route::view('/', 'goals.index')->name('index');
+
+    // Sub-pages
+    Route::view('/list', 'goals.list')->name('list');
+    Route::view('/my', 'goals.my')->name('my');
+    Route::view('/library', 'goals.library')->name('library');
+});
+
+// ==========================
+// Performance
+// ==========================
+Route::prefix('performance')->name('performance.')->group(function () {
+    // Main index
+    Route::view('/', 'performance.index')->name('index');
+
+    // Main buttons
+    Route::view('/appraisals', 'performance.appraisals')->name('appraisals');
+    Route::view('/cycles', 'performance.cycles')->name('cycles');
+    Route::view('/search', 'performance.search')->name('search');
+    Route::view('/filter', 'performance.filter')->name('filter');
+
+    // More dropdown
+    Route::prefix('more')->name('more.')->group(function () {
+        Route::view('/my-appraisals', 'performance.more.my-appraisals')->name('my-appraisals');
+        Route::view('/competency-profiles', 'performance.more.competency-profiles')->name('competency-profiles');
+
+        // Employee Trackers
+        Route::prefix('trackers')->name('trackers.')->group(function () {
+            Route::view('/list', 'performance.more.trackers.list')->name('list');
+            Route::view('/my', 'performance.more.trackers.my')->name('my');
+            Route::view('/manage', 'performance.more.trackers.manage')->name('manage');
+        });
+
+        // Configuration
+        Route::prefix('configuration')->name('configuration.')->group(function () {
+            Route::view('/appraisal', 'performance.more.configuration.appraisal')->name('appraisal');
+        });
+    });
+});
+
 
     // ==========================
     // Other Global Modules
     // ==========================
-    Route::view('/leave', 'leave/index')->name('leave.index');
     Route::view('/attendance', 'attendance/index')->name('attendance.index');
-    Route::view('/recruitment', 'recruitment/index')->name('recruitment.index');
-    Route::view('/performance', 'performance/index')->name('performance.index');
     Route::view('/settings', 'settings/index')->name('settings.index');
-    Route::view('/reports', 'reports/index')->name('reports.index');
-    Route::view('/boarding', 'boarding/index')->name('boarding.index');
     Route::view('/career', 'career/index')->name('career.index');
     Route::view('/request', 'request/index')->name('request.index');
     Route::view('/survey', 'survey/index')->name('survey.index');
     Route::view('/integration', 'integration/index')->name('integration.index');
-    Route::view('/time', 'time/index')->name('time.index');
     Route::view('/roster', 'roster/index')->name('roster.index');
-    Route::view('/goal', 'goal/index')->name('goal.index');
-    Route::view('/training', 'training/index')->name('training.index');
-
+    
     // Global Search
     Route::get('/search', function () {
         // implement global search logic
